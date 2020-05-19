@@ -1,0 +1,35 @@
+@import '../../../utils/colorUtil.scss';
+
+.day-resume {
+    margin: 5px;
+    height: 100px;
+    width: 10vw;
+
+    #day-month,
+    #holiday,
+    #day-of-week {
+        align-items: center;
+        display: flex;
+        height: 33%;
+        justify-content: center;
+        text-align: center;
+    }
+
+    #day-month,
+    #holiday {
+        background-color: $color-salmon;
+        color: white;
+        width: 100%;
+    }
+
+    #day-month {
+        background-color: $color-salmon;
+        border-radius: 15px 15px 0 0;
+    }
+
+    #day-of-week {
+        background-color: white;
+        border-radius: 0 0 15px 15px;
+        width: 100%;
+    }
+}

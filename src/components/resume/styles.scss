@@ -1,0 +1,24 @@
+@import '../../utils/colorUtil.scss';
+
+.resume {
+    background-color: beige;
+    height: 100vh;
+    width: 100vw;
+
+    #year-content {
+        align-items: center;
+        background-color: $color-green;
+        display: flex;
+        font-size: x-large;
+        height: 20%;
+    }
+
+    #year {
+        margin: 0 auto;
+    }
+
+    #days {
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
