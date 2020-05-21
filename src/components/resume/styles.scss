@@ -9,8 +9,10 @@
         align-items: center;
         background-color: $color-green;
         display: flex;
+        flex-direction: column;
         font-size: x-large;
         height: 20%;
+        justify-content: center;
     }
 
     #year {
@@ -20,5 +22,6 @@
     #days {
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
     }
 }

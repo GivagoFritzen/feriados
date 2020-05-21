@@ -1,47 +1,9 @@
-var fixedHolliday = [{
-        "day": "01/01",
-        "name": "Confraternização Universal",
-        "day-of-week": ""
-    }, {
-        "day": "21/04",
-        "name": "Tiradentes",
-        "day-of-week": ""
-    },
-    {
-        "day": "01/05",
-        "name": "Dia do Trabalho",
-        "day-of-week": ""
-    },
-    {
-        "day": "07/09",
-        "name": "Independência do Brasil",
-        "day-of-week": ""
-    },
-    {
-        "day": "12/10",
-        "name": "Nossa Sr.a Aparecida - Padroeira do Brasil",
-        "day-of-week": ""
-    },
-    {
-        "day": "02/11",
-        "name": "Finados",
-        "day-of-week": ""
-    },
-    {
-        "day": "15/11",
-        "name": "Proclamação da República",
-        "day-of-week": ""
-    },
-    {
-        "day": "25/12",
-        "name": "Natal",
-        "day-of-week": ""
-    },
-]
+import nationalHollidays from '../json/national.json';
 
 export default function GetDates() {
     const year = new Date().getFullYear();
-    let hollidays = fixedHolliday.map(holliday => {
+
+    let hollidays = nationalHollidays.map(holliday => {
         const numberOfTheWeek = new Date(`${holliday["day"]}/${year}`).getDay();
         holliday["day-of-week"] = GetDatOfTheWeek(numberOfTheWeek);
         return holliday;
@@ -58,8 +20,9 @@ export default function GetDates() {
     data.push(corpusChristi);
     data.push(carnaval);
 
-    var teste = OrderDays(data);
-    return data;
+    //  Terça feira carnaval Rio de Janeiro    
+
+    return OrderDays(data);
 }
 
 function OrderDays(hollidays) {
