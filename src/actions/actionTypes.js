@@ -1,0 +1,1 @@
+export const STATE_UPDATE_VALUE = 'STATE_UPDATE_VALUE';

@@ -1,16 +1,20 @@
 import React, { Component } from "react";
 import "./styles.scss";
+import { connect } from "react-redux";
 import DayResume from "./day/dayResume";
 import Dropdown from "./dropdown/dropdown";
 import GetDates from "../../utils/datesUtil";
 
 class Resume extends Component {
   render() {
+    const { currentState } = this.props;
+
     return (
       <div className="resume">
         <div id="year-content">
           <h1 id="year">Feriados de {new Date().getFullYear()}</h1>
-          <Dropdown></Dropdown>
+          <h1>{currentState}</h1>
+          <Dropdown />
         </div>
         <div id="days">{this.getDaysResume()}</div>
       </div>
@@ -31,4 +35,8 @@ class Resume extends Component {
   }
 }
 
-export default Resume;
+const mapStateToProps = (store) => ({
+  currentState: store.statesReducer.currentState,
+});
+
+export default connect(mapStateToProps)(Resume);

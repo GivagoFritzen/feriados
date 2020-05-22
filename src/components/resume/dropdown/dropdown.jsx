@@ -1,10 +1,32 @@
-import React, { Component } from "react";
+import React, { Component, Fragment } from "react";
 import "./styles.scss";
+import { connect } from "react-redux";
+import { bindActionCreators } from "redux";
+import { updateState } from "../../../actions";
 
 class Dropdown extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      currentState: "national",
+    };
+  }
+
+  changeCurrentState = (e) => {
+    this.setState({ currentState: e.target.value }, () =>
+      this.props.updateState(this.state.currentState)
+    );
+  };
+
   render() {
     return (
-      <select className="dropdown-select" name="county" id="county">
+      <select
+        className="dropdown-select"
+        name="county"
+        id="county"
+        onChange={this.changeCurrentState}
+      >
+        <option value="national">Nacional</option>
         <option value="acre">Acre</option>
         <option value="alagoas">Alagoas</option>
         <option value="amapa">Amapá</option>
@@ -37,4 +59,7 @@ class Dropdown extends Component {
   }
 }
 
-export default Dropdown;
+const mapDispatchToProps = (dispatch) =>
+  bindActionCreators({ updateState }, dispatch);
+
+export default connect(null, mapDispatchToProps)(Dropdown);
