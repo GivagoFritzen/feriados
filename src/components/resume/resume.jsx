@@ -7,13 +7,10 @@ import GetDates from "../../utils/datesUtil";
 
 class Resume extends Component {
   render() {
-    const { currentState } = this.props;
-
     return (
       <div className="resume">
         <div id="year-content">
           <h1 id="year">Feriados de {new Date().getFullYear()}</h1>
-          <h1>{currentState}</h1>
           <Dropdown />
         </div>
         <div id="days">{this.getDaysResume()}</div>
@@ -22,7 +19,9 @@ class Resume extends Component {
   }
 
   getDaysResume() {
-    return GetDates().map((element, index) => {
+    const { currentState } = this.props;
+
+    return GetDates(currentState).map((element, index) => {
       return (
         <DayResume
           key={index}

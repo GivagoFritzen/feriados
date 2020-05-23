@@ -5,9 +5,9 @@ class DayResume extends Component {
   render() {
     return (
       <section className="day-resume">
-        <header id="day-month">{this.props.date}</header>
-        <div id="holiday">{this.props.name}</div>
-        <footer id="day-of-week">{this.props.dayofweek}</footer>
+        <header className="day-month">{this.props.date}</header>
+        <div className="holiday">{this.props.name}</div>
+        <footer className="day-of-week">{this.props.dayofweek}</footer>
       </section>
     );
   }

@@ -1,35 +1,35 @@
 @import '../../../utils/colorUtil.scss';
+@import '../../../utils/medias.scss';
 
 .day-resume {
-    margin: 5px;
+    display: grid;
+    margin: 0 auto;
+    min-height: 150px;
     height: 100px;
-    width: 10vw;
+    width: 90%;
 
-    #day-month,
-    #holiday,
-    #day-of-week {
+    .day-month,
+    .holiday,
+    .day-of-week {
         align-items: center;
         display: flex;
-        height: 33%;
         justify-content: center;
         text-align: center;
     }
 
-    #day-month,
-    #holiday {
+    .day-month,
+    .holiday {
         background-color: $color-salmon;
         color: white;
-        width: 100%;
     }
 
-    #day-month {
+    .day-month {
         background-color: $color-salmon;
         border-radius: 15px 15px 0 0;
     }
 
-    #day-of-week {
+    .day-of-week {
         background-color: white;
         border-radius: 0 0 15px 15px;
-        width: 100%;
     }
 }
