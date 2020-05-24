@@ -5,8 +5,9 @@ export default function GetDates(currentState) {
     const easter = GetDateEaster();
 
     const hollidays = nationalHollidays.map(holliday => {
-        const numberOfTheWeek = new Date(`${holliday["day"]}/${year}`).getDay();
-        holliday["day-of-week"] = GetDatOfTheWeek(numberOfTheWeek);
+        const MMDD = TransformDDMMToMMDD(holliday["day"]);
+        const numberOfTheWeek = new Date(`${MMDD}/${year}`).getDay();
+        holliday["day-of-week"] = GetDateOfTheWeek(numberOfTheWeek);
         return holliday;
     });
 
@@ -17,8 +18,9 @@ export default function GetDates(currentState) {
     var statesHollidays = GetStateHollidays(currentState);
     if (statesHollidays !== undefined) {
         for (var y in statesHollidays) {
-            const numberOfTheWeek = new Date(`${statesHollidays["day"]}/${year}`).getDay();
-            statesHollidays[y]["day-of-week"] = GetDatOfTheWeek(numberOfTheWeek);
+            const MMDD = TransformDDMMToMMDD(statesHollidays[y]["day"]);
+            const numberOfTheWeek = new Date(`${MMDD}/${year}`).getDay();
+            statesHollidays[y]["day-of-week"] = GetDateOfTheWeek(numberOfTheWeek);
             data.push(statesHollidays[y]);
         }
     }
@@ -73,7 +75,13 @@ function OrderDays(hollidays) {
     });
 }
 
-function GetDatOfTheWeek(day) {
+function TransformDDMMToMMDD(dayAndMonth) {
+    const array = dayAndMonth.split("/");
+    const MMDD = `${array[1]}/${array[0]}`;
+    return MMDD;
+}
+
+function GetDateOfTheWeek(day) {
     switch (day) {
         case 0:
             return "Domingo";
@@ -88,8 +96,9 @@ function GetDatOfTheWeek(day) {
         case 5:
             return "Sexta";
         case 6:
-        default:
             return "Sábado";
+        default:
+            return day;
     }
 }
 
@@ -121,11 +130,11 @@ function GetCarnavalDate(easterDay) {
     const month = TwoDigit(sumDate.getMonth() + 1);
     const year = new Date().getFullYear();
 
-    const numberOfTheWeek = new Date(`${day}/${month}/${year}`).getDay();
+    const numberOfTheWeek = new Date(`${month}/${day}/${year}`).getDay();
     return {
         "day": `${day}/${month}`,
         "name": "Carnaval",
-        "day-of-week": GetDatOfTheWeek(numberOfTheWeek)
+        "day-of-week": GetDateOfTheWeek(numberOfTheWeek)
     }
 }
 
@@ -136,11 +145,11 @@ function GetCarnavalDateRioDeJaneiro(easterDay) {
     const month = TwoDigit(sumDate.getMonth() + 1);
     const year = new Date().getFullYear();
 
-    const numberOfTheWeek = new Date(`${day}/${month}/${year}`).getDay();
+    const numberOfTheWeek = new Date(`${month}/${day}/${year}`).getDay();
     return {
         "day": `${day}/${month}`,
         "name": "Carnaval",
-        "day-of-week": GetDatOfTheWeek(numberOfTheWeek)
+        "day-of-week": GetDateOfTheWeek(numberOfTheWeek)
     }
 }
 
@@ -152,11 +161,11 @@ function GetCorpusChristiDate(easterDay) {
     const month = TwoDigit(sumDate.getMonth() + 1);
     const year = new Date().getFullYear();
 
-    const numberOfTheWeek = new Date(`${day}/${month}/${year}`).getDay();
+    const numberOfTheWeek = new Date(`${month}/${day}/${year}`).getDay();
     return {
         "day": `${day}/${month}`,
         "name": "Corpus Christi",
-        "day-of-week": GetDatOfTheWeek(numberOfTheWeek)
+        "day-of-week": GetDateOfTheWeek(numberOfTheWeek)
     }
 }
 
@@ -165,13 +174,15 @@ function TwoDigit(number) {
 }
 
 function AddDays(currentDay, days) {
+    currentDay = currentDay.replace("-", "/");
     var date = new Date(currentDay);
     date.setDate(date.getDate() + days);
     return date;
 }
 
-function DecreaseDays(currentDate, days) {
-    var date = new Date(currentDate);
+function DecreaseDays(currentDay, days) {
+    currentDay = currentDay.replace("-", "/");
+    var date = new Date(currentDay);
     date.setDate(date.getDate() - days);
     return date;
 }
