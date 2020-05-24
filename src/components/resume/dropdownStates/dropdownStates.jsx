@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import { updateState } from "../../../actions";
 
-class Dropdown extends Component {
+class DropdownStates extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -22,8 +22,6 @@ class Dropdown extends Component {
     return (
       <select
         className="dropdown-select"
-        name="county"
-        id="county"
         onChange={this.changeCurrentState}
       >
         <option value="national">Nacional</option>
@@ -62,4 +60,4 @@ class Dropdown extends Component {
 const mapDispatchToProps = (dispatch) =>
   bindActionCreators({ updateState }, dispatch);
 
-export default connect(null, mapDispatchToProps)(Dropdown);
+export default connect(null, mapDispatchToProps)(DropdownStates);

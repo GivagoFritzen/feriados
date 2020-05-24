@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import "./styles.scss";
 import { connect } from "react-redux";
 import DayResume from "./day/dayResume";
-import Dropdown from "./dropdown/dropdown";
+import DropdownStates from "./dropdownStates/dropdownStates";
+import DropdownYears from "./dropdownYears/dropdownYears";
 import GetDates from "../../utils/datesUtil";
 
 class Resume extends Component {
@@ -10,8 +11,10 @@ class Resume extends Component {
     return (
       <div className="resume">
         <div id="year-content">
-          <h1 id="year">Feriados de {new Date().getFullYear()}</h1>
-          <Dropdown />
+          <h1 id="year">
+            Feriados de <DropdownYears />
+          </h1>
+          <DropdownStates />
         </div>
         <div id="days">{this.getDaysResume()}</div>
       </div>
@@ -19,9 +22,9 @@ class Resume extends Component {
   }
 
   getDaysResume() {
-    const { currentState } = this.props;
+    const { currentState, currentYear } = this.props;
 
-    return GetDates(currentState).map((element, index) => {
+    return GetDates(currentState, currentYear).map((element, index) => {
       return (
         <DayResume
           key={index}
@@ -36,6 +39,7 @@ class Resume extends Component {
 
 const mapStateToProps = (store) => ({
   currentState: store.statesReducer.currentState,
+  currentYear: store.yearReducer.currentYear,
 });
 
 export default connect(mapStateToProps)(Resume);

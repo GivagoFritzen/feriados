@@ -1,8 +1,8 @@
 import nationalHollidays from '../json/national.json';
 
-export default function GetDates(currentState) {
-    const year = new Date().getFullYear();
-    const easter = GetDateEaster();
+export default function GetDates(currentState, currentYear) {
+    const year = currentYear;
+    const easter = GetDateEaster(currentYear);
 
     const hollidays = nationalHollidays.map(holliday => {
         const MMDD = TransformDDMMToMMDD(holliday["day"]);
@@ -26,10 +26,10 @@ export default function GetDates(currentState) {
     }
 
     if (currentState === "rioDeJaneiro")
-        data.push(GetCarnavalDateRioDeJaneiro(easter));
+        data.push(GetCarnavalDateRioDeJaneiro(easter, currentYear));
 
-    data.push(GetCorpusChristiDate(easter));
-    data.push(GetCarnavalDate(easter));
+    data.push(GetCorpusChristiDate(easter, currentYear));
+    data.push(GetCarnavalDate(easter, currentYear));
 
     return OrderDays(data);
 }
@@ -102,8 +102,8 @@ function GetDateOfTheWeek(day) {
     }
 }
 
-function GetDateEaster() {
-    const year = new Date().getFullYear();
+function GetDateEaster(currentYear) {
+    const year = currentYear;
 
     const a = year % 19;
     const b = Math.floor(year / 100);
@@ -123,12 +123,12 @@ function GetDateEaster() {
     return `${month}-${day}-${year}`;
 }
 
-function GetCarnavalDate(easterDay) {
+function GetCarnavalDate(easterDay, currentYear) {
     const sumDate = DecreaseDays(easterDay, 47);
 
     const day = sumDate.getDate().toString();
     const month = TwoDigit(sumDate.getMonth() + 1);
-    const year = new Date().getFullYear();
+    const year = currentYear;
 
     const numberOfTheWeek = new Date(`${month}/${day}/${year}`).getDay();
     return {
@@ -138,12 +138,12 @@ function GetCarnavalDate(easterDay) {
     }
 }
 
-function GetCarnavalDateRioDeJaneiro(easterDay) {
+function GetCarnavalDateRioDeJaneiro(easterDay, currentYear) {
     const sumDate = DecreaseDays(easterDay, 46);
 
     const day = sumDate.getDate().toString();
     const month = TwoDigit(sumDate.getMonth() + 1);
-    const year = new Date().getFullYear();
+    const year = currentYear;
 
     const numberOfTheWeek = new Date(`${month}/${day}/${year}`).getDay();
     return {
@@ -153,13 +153,13 @@ function GetCarnavalDateRioDeJaneiro(easterDay) {
     }
 }
 
-function GetCorpusChristiDate(easterDay) {
+function GetCorpusChristiDate(easterDay, currentYear) {
     let sumDate = new Date();
     sumDate = AddDays(easterDay, 60);
 
     const day = sumDate.getDate().toString();
     const month = TwoDigit(sumDate.getMonth() + 1);
-    const year = new Date().getFullYear();
+    const year = currentYear;
 
     const numberOfTheWeek = new Date(`${month}/${day}/${year}`).getDay();
     return {
