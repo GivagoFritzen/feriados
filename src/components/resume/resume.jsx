@@ -10,12 +10,12 @@ class Resume extends Component {
   render() {
     return (
       <div className="resume">
-        <div id="year-content">
+        <label id="year-content">
           <h1 id="year">
             Feriados de <DropdownYears />
           </h1>
           <DropdownStates />
-        </div>
+        </label>
         <div id="days">{this.getDaysResume()}</div>
       </div>
     );
