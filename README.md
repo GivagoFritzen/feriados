@@ -1,3 +1,1 @@
-## Available Scripts
-
-Projeto para mostrar feriados estaduais e nacionais.
+## Projeto para mostrar feriados estaduais e nacionais.
